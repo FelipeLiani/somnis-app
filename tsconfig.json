@@ -3,6 +3,7 @@
   "compilerOptions": {
     "strict": true,
     "jsx": "react", // Adicione esta linha para habilitar o uso de JSX
+    "esModuleInterop": true,
     "paths": {
       "@/*": [
         "./*"

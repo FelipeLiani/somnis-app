@@ -1,17 +1,18 @@
 import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
+
+import { MaterialIcons } from '@expo/vector-icons';
+import { Tabs } from 'expo-router';
+import { StyleSheet } from 'react-native';
 
 import Colors from '@/constants/Colors';
 import { useColorScheme } from 'react-native';
 
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
+
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  name: React.ComponentProps<typeof MaterialIcons>['name'];
   color: string;
 }) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+  return <MaterialIcons size={34} style={{ marginBottom: -30 }} {...props} />
 }
 
 export default function TabLayout() {
@@ -21,37 +22,37 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
+        tabBarShowLabel: false,
+        tabBarStyle: styles.tabBar
       }}>
       <Tabs.Screen
-        name="index"
+        name='index'
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
+          tabBarIcon: ({ color }) => <TabBarIcon name='home' color={color} />
         }}
       />
       <Tabs.Screen
-        name="two"
+        name='search'
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name='search' color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name='library'
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name='my-library-music' color={color} />,
         }}
       />
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  tabBar: {
+    height: 80,
+    margin: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 30
+  }
+})
